@@ -4,7 +4,6 @@ using System;
 public enum Rakennus
 {
     Kerrostalo,
-    Myyntiautomaatti,
     Omakotitalo,
     Kauppa
 }
@@ -36,7 +35,6 @@ public class MachineInfo : MonoBehaviour
         switch (rakennus)
         {
             case Rakennus.Kerrostalo: return 500;
-            case Rakennus.Myyntiautomaatti: return 20;
             case Rakennus.Omakotitalo: return 250;
             case Rakennus.Kauppa: return 100;
         }
@@ -52,7 +50,6 @@ public class MachineInfo : MonoBehaviour
         switch (rakennus)
         {
             case Rakennus.Kerrostalo: return 500;
-            case Rakennus.Myyntiautomaatti: return 50;
             case Rakennus.Omakotitalo: return 200;
             case Rakennus.Kauppa: return 300;
         }

@@ -5,7 +5,7 @@ public class PlayerDataManager : MonoBehaviour
 {
     public static PlayerDataManager Instance { get; private set; }
 
-    [SerializeField] private int money = 100;
+    [SerializeField] private int money = 100000;
     [SerializeField] private TMP_Text coinText;
 
     public int Money => money;

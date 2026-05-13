@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2574727604815402355}
   - component: {fileID: 3086103519923322505}
+  - component: {fileID: -926470256559314400}
   m_Layer: 0
   m_Name: car_red_rev_back
   m_TagString: Untagged
@@ -93,6 +94,21 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &-926470256559314400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133353503461123633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 207e36babf7a4794fbd57feef4b9508b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Tavara
+  itemName: Black Car
+  isBuilding: 0
+  prefab: {fileID: 1133353503461123633}
 --- !u!1 &1510568012767413242
 GameObject:
   m_ObjectHideFlags: 0

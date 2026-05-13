@@ -192,6 +192,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3417628047582400595}
   - component: {fileID: 6109218238943141787}
+  - component: {fileID: 6853540253784202695}
   m_Layer: 0
   m_Name: car_red_body
   m_TagString: Untagged
@@ -275,3 +276,18 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &6853540253784202695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8779602851186365576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 207e36babf7a4794fbd57feef4b9508b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Tavara
+  itemName: Red Car
+  isBuilding: 0
+  prefab: {fileID: 8779602851186365576}

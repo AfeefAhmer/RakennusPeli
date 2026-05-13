@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
 
 public class PlayerMachineInteraction : MonoBehaviour
 {
@@ -23,7 +24,8 @@ public class PlayerMachineInteraction : MonoBehaviour
     public Button carCancelButton;
 
     [Header("Prefabs")]
-    public GameObject buildingPrefab;
+    public List<GameObject> buildingPrefab;
+    private int SelectedBuilding = 0;
     public GameObject carPrefab;
 
     private int selectedBuilding;
@@ -169,8 +171,22 @@ public class PlayerMachineInteraction : MonoBehaviour
         carPriceText.text = "Hinta: " + currentCost + " kultaa";
     }
 
+    public void BuildingSelect(int Choice)
+    {
+        SelectedBuilding = Choice;
+    }
     void BuyItem()
     {
+        Debug.Log("BUY ITEM");
+
+        Debug.Log("currentMachine: " + currentMachine);
+        Debug.Log("buildingPrefab: " + buildingPrefab);
+        Debug.Log("PlayerInventory.Instance: " + PlayerInventory.Instance);
+
+        PlayerController controller = GetComponent<PlayerController>();
+
+        Debug.Log("controller: " + controller);
+
         if (currentMachine == null || currentCost <= 0)
             return;
 
@@ -180,36 +196,30 @@ public class PlayerMachineInteraction : MonoBehaviour
             return;
         }
 
-        PlayerController controller = GetComponent<PlayerController>();
-
-        // ===== BUILDING OSTO =====
         if (currentMachine.machineType == MachineType.BuildingMachine)
         {
-            GameObject go = Instantiate(buildingPrefab);
+            Tavara tavara = buildingPrefab[SelectedBuilding].GetComponent<Tavara>();
 
-            Tavara tavara = go.GetComponent<Tavara>();
+            Debug.Log("tavara: " + tavara);
+
+            if (tavara == null)
+            {
+                Debug.LogError("Tavara script puuttuu prefabista!");
+                return;
+            }
 
             if (!controller.OstoLisatty(tavara))
             {
                 PlayerDataManager.Instance.AddMoney(currentCost);
 
                 Debug.Log("Reppu täynnä!");
+                return;
             }
+
+            PlayerInventory.Instance.AddItem(tavara);
+
+            Debug.Log("Rakennus lisätty inventoryyn");
         }
-
-        // ===== CAR OSTO =====
-        else if (currentMachine.machineType == MachineType.CarMachine)
-        {
-            GameObject go = Instantiate(carPrefab);
-
-            Tavara tavara = go.GetComponent<Tavara>();
-
-            if (!controller.OstoLisatty(tavara))
-            {
-                PlayerDataManager.Instance.AddMoney(currentCost);
-
-                Debug.Log("Reppu täynnä!");
-            }
-        }
+        InventoryUI.Instance.Refresh();
     }
 }
