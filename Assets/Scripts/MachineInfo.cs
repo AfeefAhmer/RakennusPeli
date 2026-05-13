@@ -13,7 +13,7 @@ public enum Auto
 {
     musta,
     punainen,
-    miniautoPunainen
+    sininen
 }
 
 public enum MachineType
@@ -35,10 +35,10 @@ public class MachineInfo : MonoBehaviour
 
         switch (rakennus)
         {
-            case Rakennus.Kerrostalo: return 5000;
-            case Rakennus.Myyntiautomaatti: return 2000;
-            case Rakennus.Omakotitalo: return 2500;
-            case Rakennus.Kauppa: return 10000;
+            case Rakennus.Kerrostalo: return 500;
+            case Rakennus.Myyntiautomaatti: return 20;
+            case Rakennus.Omakotitalo: return 250;
+            case Rakennus.Kauppa: return 100;
         }
 
         return 0;
@@ -51,10 +51,10 @@ public class MachineInfo : MonoBehaviour
 
         switch (rakennus)
         {
-            case Rakennus.Kerrostalo: return 5000;
+            case Rakennus.Kerrostalo: return 500;
             case Rakennus.Myyntiautomaatti: return 50;
-            case Rakennus.Omakotitalo: return 2000;
-            case Rakennus.Kauppa: return 3000;
+            case Rakennus.Omakotitalo: return 200;
+            case Rakennus.Kauppa: return 300;
         }
 
         return 0;
@@ -67,9 +67,9 @@ public class MachineInfo : MonoBehaviour
 
         switch (auto)
         {
-            case Auto.musta: return 2000;
-            case Auto.punainen: return 2500;
-            case Auto.miniautoPunainen: return 1000;
+            case Auto.musta: return 20;
+            case Auto.punainen: return 25;
+            case Auto.sininen: return 30;
         }
 
         return 0;
@@ -82,9 +82,9 @@ public class MachineInfo : MonoBehaviour
 
         switch (auto)
         {
-            case Auto.musta: return 180;
-            case Auto.punainen: return 200;
-            case Auto.miniautoPunainen: return 120;
+            case Auto.musta: return 20;
+            case Auto.punainen: return 20;
+            case Auto.sininen: return 20;
         }
 
         return 0;
