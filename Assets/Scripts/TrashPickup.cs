@@ -1,64 +1,38 @@
 using UnityEngine;
-using TMPro;
 
 public class TrashPickup : MonoBehaviour
 {
-    [SerializeField] private TMP_Text interactionText;
-
-    private bool playerNearby = false;
-    private bool collected = false;
-
-    private PlayerTrashInventory currentInventory;
+    private bool playerNearby;
+    private PlayerTrashInventory inventory;
 
     private void Update()
     {
-        if (playerNearby &&
-            !collected &&
-            Input.GetKeyDown(KeyCode.E))
+        if (playerNearby && Input.GetKeyDown(KeyCode.E))
         {
-            collected = true;
-
-            if (currentInventory != null)
+            if (inventory != null)
             {
-                currentInventory.AddTrash();
-
-                interactionText.text = "";
-
-                // Estää uuden käytön heti
-                GetComponent<Collider2D>().enabled = false;
-                GetComponent<SpriteRenderer>().enabled = false;
-
-                // Spawn uusi roska
-                TrashSpawner.Instance.TrashCollected();
-
-                // Poista objekti hetken päästä
-                Destroy(gameObject, 0.1f);
+                inventory.AddTrash();
             }
+
+            Destroy(gameObject);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!collected && other.CompareTag("Player"))
-        {
-            playerNearby = true;
+        if (!other.CompareTag("Player")) return;
 
-            currentInventory =
-                other.GetComponent<PlayerTrashInventory>();
+        playerNearby = true;
+        inventory = other.GetComponent<PlayerTrashInventory>();
 
-            interactionText.text = "Ota roska [E]";
-        }
+        Debug.Log("Player entered trash");
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
-        {
-            playerNearby = false;
+        if (!other.CompareTag("Player")) return;
 
-            currentInventory = null;
-
-            interactionText.text = "";
-        }
+        playerNearby = false;
+        inventory = null;
     }
 }

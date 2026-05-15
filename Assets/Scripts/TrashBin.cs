@@ -1,44 +1,47 @@
-using UnityEngine;
-using TMPro;
+﻿using UnityEngine;
 
 public class TrashBin : MonoBehaviour
 {
     [SerializeField] private int moneyPerTrash = 10;
-    [SerializeField] private TMP_Text interactionText;
 
     private bool playerNearby = false;
-    private PlayerTrashInventory currentInventory;
+    private PlayerTrashInventory inventory;
 
     private void Update()
     {
         if (playerNearby && Input.GetKeyDown(KeyCode.E))
         {
-            if (currentInventory != null)
+            if (inventory != null)
             {
-                currentInventory.SellTrash(moneyPerTrash);
+                if (inventory.trashCount > 0)
+                {
+                    inventory.SellTrash(moneyPerTrash);
+
+                    Debug.Log("✔ Roskat myyty");
+
+                    // Spawn vasta kun myydään
+                    TrashSpawner.Instance.TrashCollected();
+                }
             }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
-        {
-            playerNearby = true;
+        if (!other.CompareTag("Player")) return;
 
-            currentInventory =
-                other.GetComponent<PlayerTrashInventory>();
+        playerNearby = true;
 
-            interactionText.text = "Laita roska [E]";
-        }
+        inventory = other.GetComponent<PlayerTrashInventory>();
+
+        Debug.Log("✔ Pelaaja roskakorilla");
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
-        {
-            playerNearby = false;
-            interactionText.text = "";
-        }
+        if (!other.CompareTag("Player")) return;
+
+        playerNearby = false;
+        inventory = null;
     }
 }
