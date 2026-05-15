@@ -1,10 +1,14 @@
 using UnityEngine;
 
+public enum ItemType
+{
+    Building,
+    Car
+}
+
 public class Tavara : MonoBehaviour
 {
     public string itemName;
-
-    public bool isBuilding;
-
+    public ItemType itemType;
     public GameObject prefab;
 }

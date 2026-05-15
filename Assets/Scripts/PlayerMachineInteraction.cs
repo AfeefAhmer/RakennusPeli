@@ -26,7 +26,9 @@ public class PlayerMachineInteraction : MonoBehaviour
     [Header("Prefabs")]
     public List<GameObject> buildingPrefab;
     private int SelectedBuilding = 0;
-    public GameObject carPrefab;
+
+    // LISÄTTY (suositus tulevaisuutta varten)
+    public List<GameObject> carPrefabs;
 
     private int selectedBuilding;
     private int selectedCar;
@@ -47,13 +49,11 @@ public class PlayerMachineInteraction : MonoBehaviour
 
     void Update()
     {
-        // Avaa kauppa E-näppäimellä
         if (playerNearMachine && Input.GetKeyDown(KeyCode.E))
         {
             OpenMachine();
         }
 
-        // Sulje ESC:llä
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             CloseMachine();
@@ -175,17 +175,13 @@ public class PlayerMachineInteraction : MonoBehaviour
     {
         SelectedBuilding = Choice;
     }
+
+    // ================= BUY ITEM (BUILDING + CAR) =================
     void BuyItem()
     {
         Debug.Log("BUY ITEM");
 
-        Debug.Log("currentMachine: " + currentMachine);
-        Debug.Log("buildingPrefab: " + buildingPrefab);
-        Debug.Log("PlayerInventory.Instance: " + PlayerInventory.Instance);
-
         PlayerController controller = GetComponent<PlayerController>();
-
-        Debug.Log("controller: " + controller);
 
         if (currentMachine == null || currentCost <= 0)
             return;
@@ -196,11 +192,10 @@ public class PlayerMachineInteraction : MonoBehaviour
             return;
         }
 
+        // ===== BUILDINGS =====
         if (currentMachine.machineType == MachineType.BuildingMachine)
         {
             Tavara tavara = buildingPrefab[SelectedBuilding].GetComponent<Tavara>();
-
-            Debug.Log("tavara: " + tavara);
 
             if (tavara == null)
             {
@@ -211,7 +206,6 @@ public class PlayerMachineInteraction : MonoBehaviour
             if (!controller.OstoLisatty(tavara))
             {
                 PlayerDataManager.Instance.AddMoney(currentCost);
-
                 Debug.Log("Reppu täynnä!");
                 return;
             }
@@ -220,6 +214,33 @@ public class PlayerMachineInteraction : MonoBehaviour
 
             Debug.Log("Rakennus lisätty inventoryyn");
         }
+
+        // ===== CARS (LISÄTTY) =====
+        else if (currentMachine.machineType == MachineType.CarMachine)
+        {
+
+             GameObject carObj = carPrefabs[selectedCar];
+
+            Tavara tavara = carObj.GetComponent<Tavara>();
+
+            if (tavara == null)
+            {
+                Debug.LogError("Tavara script puuttuu car prefabista!");
+                return;
+            }
+
+            if (!controller.OstoLisatty(tavara))
+            {
+                PlayerDataManager.Instance.AddMoney(currentCost);
+                Debug.Log("Reppu täynnä!");
+                return;
+            }
+
+            PlayerInventory.Instance.AddItem(tavara);
+
+            Debug.Log("Auto lisätty inventoryyn");
+        }
+
         InventoryUI.Instance.Refresh();
     }
 }

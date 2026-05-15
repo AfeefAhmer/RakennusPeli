@@ -14,7 +14,8 @@ public class InventoryUI : MonoBehaviour
 
     [Header("Build")]
     public BuildingPlacer buildingPlacer;
-
+    [Header("Cars")]
+    public AutoPlacer autoPlacer;
     private List<Tavara> currentItems = new List<Tavara>();
 
     // Tallennetaan item -> button yhteys
@@ -74,16 +75,17 @@ public class InventoryUI : MonoBehaviour
 
     void SelectItem(Tavara item, GameObject buttonObj)
     {
-        if (item.isBuilding)
+        if (item.itemType == ItemType.Building)
         {
             buildingPlacer.StartPlacing(item.prefab);
-
-            // Poista vain tämä nappi UI:sta
-            Destroy(buttonObj);
-
-            // Poista listasta
-            currentItems.Remove(item);
-            itemButtons.Remove(item);
         }
+        else if (item.itemType == ItemType.Car)
+        {
+            autoPlacer.StartPlacing(item.prefab);
+        }
+
+        Destroy(buttonObj);
+        currentItems.Remove(item);
+        itemButtons.Remove(item);
     }
 }
