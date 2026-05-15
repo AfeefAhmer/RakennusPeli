@@ -691,6 +691,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5897105119234703993, guid: 5cb3a890ecbd1ca42a0d8d3838815951, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6288652007517030458, guid: 5cb3a890ecbd1ca42a0d8d3838815951, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -18059,7 +18063,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7150202985508503380, guid: 6441933c22f5b5c43997039b9d774917, type: 3}
       propertyPath: money
-      value: 0
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 7150202985508503380, guid: 6441933c22f5b5c43997039b9d774917, type: 3}
       propertyPath: coinText
