@@ -1,2 +1,3 @@
 Pelissä on kaksi kone, josta voi ostaa autoja ja rakennuksia. Pelaajalla on aluksi 0 kolikkoa hänen pitää kerätä roskaa, jotta saisi rahaa jo voi ostaa rakennuksia. Pelissä ei ole mitään loppua ja pelissä tulee yksi roska kerrallaan eli ei tule uusi roskaa kunnes laitat ensimmäinen roska roskakoriin. Pelissä kone avautuu painamalla E näppäin ja myös roska kerätään E napilla ja E napilla myös laitetaan roska roskiin.
+
 Afeef Ahmer teki koneet, josta voi ostaa rakennuksia, pelaaja joka liikkuu pelissä ja pelaajan inventory mihin ostot menevät. Tein myös sen, että pelaaja voi laittaa rakennukset oman mielen mukaan mihin tahansa.
